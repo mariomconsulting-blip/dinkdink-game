@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DinkDink - Play Now</title>
+    <style>
+        /* Base Styles & Colors */
+        :root {
+            --bg-color: #121212;
+            --neon-green: #39ff14;
+            --neon-orange: #ff5e00;
+            --dark-panel: #1e1e1e;
+            --text-light: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: var(--dark-panel);
+            align-items: center;
+        }
+
+        .logo-area {
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .logo-area h1 { margin: 0; font-size: 28px; letter-spacing: 2px; }
+        .live-counter { color: var(--neon-green); font-weight: bold; font-size: 14px; margin-top: 5px; }
+
+        /* Preview Window Container */
+        .preview-container {
+            flex: 1;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* The Video Element */
+        .game-preview-video {
+            width: 100%;
+            max-height: 40vh;
+            border-radius: 16px;
+            object-fit: cover;
+            border: 2px solid #333;
+            box-shadow: 0px 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .chat-bubble {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            color: #000;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* Action Buttons */
+        .action-area {
+            padding: 20px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 18px 10px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0px 4px 0px rgba(0,0,0,0.4);
+            transition: transform 0.1s;
+        }
+
+        .btn:active { transform: translateY(4px); box-shadow: none; }
+
+        .btn-online {
+            background-color: var(--neon-green);
+            color: #000;
+        }
+
+        .btn-ai {
+            background-color: var(--neon-orange);
+            color: #fff;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 15px;
+            background: var(--dark-panel);
+            border-top: 1px solid #333;
+        }
+        
+        .nav-item { font-size: 12px; color: #aaa; text-align: center; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <span>☰</span>
+        <span>dinkdink.org</span>
+        <span>⚙️</span>
+    </div>
+
+    <div class="logo-area">
+        <h1>DINK DINK!</h1>
+        <div class="live-counter">🟢 1,245 PLAYERS ONLINE NOW</div>
+    </div>
+
+    <div class="preview-container">
+        <video class="game-preview-video" autoplay loop muted playsinline>
+            <source src="your-gameplay-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="chat-bubble">Nice dink shot! 💥</div>
+    </div>
+
+    <div class="action-area">
+        <button class="btn btn-online">🏓 Online Multi</button>
+        <button class="btn btn-ai">🤖 VS. AI Challenge</button>
+    </div>
+
+    <div class="bottom-nav">
+        <div class="nav-item">🏆<br>Ranks</div>
+        <div class="nav-item">🎨<br>My Paddle</div>
+        <div class="nav-item">🌐<br>Community</div>
+    </div>
+
+</body>
+</html>
