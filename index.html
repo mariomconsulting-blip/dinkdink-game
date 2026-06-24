@@ -13,39 +13,37 @@
     
     <style>
         /* ==========================================
-           DinkDink.org - Premium Court UI Engine
+           DinkDink.org - Sunlight-Optimized Mobile UI Layout
            ========================================== */
 
         :root {
             --court-blue: #0077c8;
-            --court-green: #22c55e;
             --neon-green: #39ff14;
             --neon-orange: #ff5e00;
-            --text-dark: #0f172a;
-            --text-light: #ffffff;
-            --text-muted: #cbd5e1; /* Boosted slate tint for extreme legibility */
+            --stark-black: #000000;
+            --stark-white: #ffffff;
+            --text-muted: #e2e8f0; /* Ultra-bright gray for maximum outdoor utility contrast */
         }
 
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Arial, sans-serif;
-            color: var(--text-light);
+            font-family: 'Segoe UI', -apple-system, Arial, sans-serif;
+            color: var(--stark-white);
             display: flex;
             flex-direction: column;
             
-            /* CRITICAL FIX: Dynamic Viewport Height prevents mobile browser bar overlapping */
+            /* Dynamic Viewport height constraint to defeat mobile browser toolbars */
             height: 100vh;
             height: 100dvh; 
             overflow: hidden;
             
-            /* Acrylic Sport Court Background Layout */
+            /* Pure high-contrast acrylic court base colors */
             background-color: var(--court-blue);
             background-image: 
-                linear-gradient(90deg, rgba(255,255,255,0.15) 2px, transparent 2px),
-                linear-gradient(0deg, rgba(255,255,255,0.15) 2px, transparent 2px),
-                radial-gradient(circle at 50% 30%, rgba(255,255,255,0.2) 0%, rgba(15,23,42,0.4) 100%);
-            background-size: 100% 100%, 100% 100%, auto;
+                linear-gradient(90deg, rgba(255,255,255,0.2) 2px, transparent 2px),
+                linear-gradient(0deg, rgba(255,255,255,0.2) 2px, transparent 2px);
+            background-size: 100% 100%;
             background-position: center;
 
             -webkit-user-select: none;
@@ -53,45 +51,43 @@
             touch-action: manipulation;
         }
 
-        /* --- Top Navigation Bar --- */
+        /* --- Top Browser Context Strip --- */
         .top-bar {
             display: flex;
             justify-content: space-between;
             padding: 12px 20px;
-            background: rgba(15, 23, 42, 0.7);
+            background: var(--stark-black); /* Solid black background for maximum readability outside */
             align-items: center;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 2px solid rgba(255,255,255,0.2);
         }
 
         .logo-area {
             text-align: center;
-            padding: 10px 0 0px 0;
+            padding: 8px 0 0px 0;
         }
 
         .logo-area h1 { 
             margin: 0; 
             font-size: 34px; 
             font-weight: 900;
-            letter-spacing: 1px;
-            color: var(--text-light);
-            text-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            letter-spacing: 1.5px;
+            color: var(--stark-white);
+            text-shadow: 0 4px 6px rgba(0,0,0,0.6);
         }
 
         .live-counter { 
             color: var(--neon-green); 
-            font-weight: 800; 
+            font-weight: 900; 
             font-size: 13px; 
             margin-top: 4px; 
             letter-spacing: 1px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
-        /* --- Video Arena Container --- */
+        /* --- Center Court Graphic Canvas Window --- */
         .preview-container {
             flex: 1;
-            padding: 5px 24px;
+            padding: 10px 24px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -99,38 +95,53 @@
             position: relative;
         }
 
-        .game-preview-video {
+        .game-preview-image {
             width: 100%;
             height: 100%;
-            max-height: 34vh;
+            max-height: 35vh;
             border-radius: 24px;
             object-fit: cover;
-            border: 3px solid rgba(255, 255, 255, 0.95);
-            box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.5);
-            background-color: rgba(15, 23, 42, 0.9);
+            border: 4px solid var(--stark-white); /* Thicker border to make the frame pop out under glare */
+            box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        /* High-Contrast "Play Anytime Anywhere" Banner Ribbon */
+        .marketing-ribbon {
+            position: absolute;
+            top: 25px;
+            background: var(--stark-black);
+            color: var(--stark-white);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid var(--neon-green);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            pointer-events: none;
         }
 
         .chat-bubble {
             position: absolute;
             bottom: -10px;
-            background: #ffffff;
-            color: var(--text-dark);
+            background: var(--stark-white);
+            color: var(--stark-black);
             padding: 8px 20px;
             border-radius: 30px;
-            font-weight: 800;
+            font-weight: 900;
             font-size: 13px;
-            box-shadow: 0px 8px 24px rgba(0,0,0,0.3);
-            animation: bounce 2.5s infinite;
-            border: 2px solid var(--text-dark);
+            box-shadow: 0px 8px 20px rgba(0,0,0,0.4);
+            border: 3px solid var(--stark-black);
             z-index: 10;
         }
 
-        /* --- Authentic Vector Paddle Controls --- */
+        /* --- Vector Paddle Layout Controls --- */
         .action-area {
-            padding: 15px 20px 25px 20px;
+            padding: 15px 20px 20px 20px;
             display: flex;
             justify-content: space-around;
-            gap: 20px;
+            gap: 15px;
         }
 
         .paddle-wrapper {
@@ -140,7 +151,7 @@
             flex-direction: column;
             align-items: center;
             cursor: pointer;
-            max-width: 145px;
+            max-width: 150px;
             transition: transform 0.1s ease;
         }
 
@@ -151,13 +162,14 @@
         .paddle-svg {
             width: 100%;
             height: auto;
-            filter: drop-shadow(0px 10px 10px rgba(0,0,0,0.4));
+            filter: drop-shadow(0px 10px 8px rgba(0,0,0,0.5));
         }
 
+        /* Precise Text Layout Inside Paddle Faces */
         .paddle-text-overlay {
             position: absolute;
-            top: 25%; 
-            width: 85%;
+            top: 22%; 
+            width: 82%;
             text-align: center;
             pointer-events: none;
             display: flex;
@@ -172,33 +184,45 @@
         }
 
         .paddle-title {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 900;
             line-height: 1.2;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
             text-transform: uppercase;
         }
 
-        .btn-online .paddle-title { color: #050b11; }
-        .btn-ai .paddle-title { color: #ffffff; }
+        .paddle-subtitle {
+            font-size: 9px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-top: 4px;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
 
-        /* --- High Contrast Bottom Utility Grid --- */
+        /* Crisp High Contrast Text Maps for Outdoor Glare Protection */
+        .btn-online .paddle-title { color: #000000; }
+        .btn-online .paddle-subtitle { color: #000000; font-weight: 900; }
+        
+        .btn-ai .paddle-title { color: var(--stark-white); text-shadow: 0px 2px 4px rgba(0,0,0,0.5); }
+
+        /* --- Solid High-Contrast Bottom Utility Strip --- */
         .bottom-nav {
             display: flex;
             justify-content: space-around;
             align-items: center;
-            /* CRITICAL FIX: Enhanced padding values to push content clean out of mobile safety bars */
             padding-top: 16px;
             padding-left: 10px;
             padding-right: 10px;
+            /* Extra safety margin padding to clear ambient phone browser interface elements */
             padding-bottom: calc(24px + env(safe-area-inset-bottom));
-            background: #090d16; 
-            border-top: 2px solid rgba(255, 255, 255, 0.15);
+            background: var(--stark-black); 
+            border-top: 3px solid rgba(255, 255, 255, 0.2);
         }
 
         .nav-item { 
             font-size: 13px; 
-            font-weight: 800;
+            font-weight: 900;
             color: var(--text-muted); 
             text-align: center; 
             cursor: pointer;
@@ -207,8 +231,7 @@
         }
 
         .nav-item.active {
-            color: #ffffff;
-            text-shadow: 0px 0px 8px rgba(255,255,255,0.6);
+            color: var(--neon-green); /* Green highlight indicator stands out instantly outdoors */
         }
 
         .nav-icon {
@@ -216,75 +239,73 @@
             margin-bottom: 2px;
             display: inline-block;
         }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-        }
     </style>
 </head>
 <body>
 
-    <!-- 1. Global Context Strip -->
+    <!-- 1. System Header Strip -->
     <div class="top-bar">
         <span style="font-size: 20px; cursor: pointer;">☰</span>
         <span style="font-weight: 700; letter-spacing: 0.5px;">dinkdink.org</span>
         <span style="font-size: 20px; cursor: pointer;">⚙️</span>
     </div>
 
-    <!-- 2. Main Title Layout -->
+    <!-- 2. Brand Positioning Section -->
     <div class="logo-area">
         <h1>DINK DINK!</h1>
         <div class="live-counter">🟢 PLAYERS ONLINE NOW</div>
     </div>
 
-    <!-- 3. Central Media Environment Stage -->
+    <!-- 3. Primary Graphics Hub Layer -->
     <div class="preview-container">
-        <!-- Pro-tip: Insert your preview graphic placeholder directly here inside the block context -->
-        <video class="game-preview-video" autoplay loop muted playsinline>
-            <source src="gameplay-preview.mp4" type="video/mp4">
-        </video>
+        <!-- Render target using the verbatim dink court AI.jpg file context -->
+        <img class="game-preview-image" src="dink court AI.jpg" alt="DinkDink Gameplay Arena Preview">
+        
+        <!-- Stark marketing floating banner callout -->
+        <div class="marketing-ribbon">Play anytime anywhere</div>
+        
         <div class="chat-bubble">Nice dink shot! 💥</div>
     </div>
 
-    <!-- 4. Real Paddle Interaction Block -->
+    <!-- 4. Conversion Action Matrix -->
     <div class="action-area">
         
-        <!-- Paddle 1: Online Multiplayer -->
-        <div class="paddle-wrapper btn-online" onclick="console.log('Matchmaking initialized...')">
+        <!-- Left Paddle Button: Matchmaking Configuration -->
+        <div class="paddle-wrapper btn-online" onclick="console.log('Online queue selected')">
             <svg class="paddle-svg" viewBox="0 0 130 200" xmlns="http://www.w3.org/2000/svg">
-                <path d="M 15,65 C 15,15 115,15 115,65 L 110,135 C 110,145 95,150 85,152 L 85,195 C 85,198 45,198 45,195 L 45,152 C 35,150 20,145 20,135 Z" fill="#1e293b" />
+                <path d="M 15,65 C 15,15 115,15 115,65 L 110,135 C 110,145 95,150 85,152 L 85,195 C 85,198 45,198 45,195 L 45,152 C 35,150 20,145 20,135 Z" fill="#000000" stroke="#ffffff" stroke-width="1" />
                 <path d="M 19,65 C 19,21 111,21 111,65 L 106,133 C 106,141 93,146 81,147 L 81,152 L 49,152 L 49,147 C 37,146 24,141 24,133 Z" fill="#39ff14" />
-                <path d="M 49,152 L 81,152 L 78,194 C 78,196 52,196 52,194 Z" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" />
-                <line x1="50" y1="162" x2="80" y2="166" stroke="#e2e8f0" stroke-width="1.5" />
-                <line x1="51" y1="172" x2="79" y2="176" stroke="#e2e8f0" stroke-width="1.5" />
-                <line x1="51" y1="182" x2="79" y2="186" stroke="#e2e8f0" stroke-width="1.5" />
+                <path d="M 49,152 L 81,152 L 78,194 C 78,196 52,196 52,194 Z" fill="#ffffff" stroke="#000000" stroke-width="1.5" />
+                <line x1="50" y1="162" x2="80" y2="166" stroke="#000000" stroke-width="1.5" />
+                <line x1="51" y1="172" x2="79" y2="176" stroke="#000000" stroke-width="1.5" />
+                <line x1="51" y1="182" x2="79" y2="186" stroke="#000000" stroke-width="1.5" />
             </svg>
             <div class="paddle-text-overlay">
                 <span class="paddle-icon">🏓</span>
-                <span class="paddle-title">Online<br>Multi</span>
+                <span class="paddle-title">Instant Match</span>
+                <span class="paddle-subtitle">No Login Required</span>
             </div>
         </div>
 
-        <!-- Paddle 2: VS AI Challenge -->
-        <div class="paddle-wrapper btn-ai" onclick="console.log('AI Engine loading...')">
+        <!-- Right Paddle Button: Training Configuration -->
+        <div class="paddle-wrapper btn-ai" onclick="console.log('Training track selected')">
             <svg class="paddle-svg" viewBox="0 0 130 200" xmlns="http://www.w3.org/2000/svg">
-                <path d="M 15,65 C 15,15 115,15 115,65 L 110,135 C 110,145 95,150 85,152 L 85,195 C 85,198 45,198 45,195 L 45,152 C 35,150 20,145 20,135 Z" fill="#1e293b" />
+                <path d="M 15,65 C 15,15 115,15 115,65 L 110,135 C 110,145 95,150 85,152 L 85,195 C 85,198 45,198 45,195 L 45,152 C 35,150 20,145 20,135 Z" fill="#000000" stroke="#ffffff" stroke-width="1" />
                 <path d="M 19,65 C 19,21 111,21 111,65 L 106,133 C 106,141 93,146 81,147 L 81,152 L 49,152 L 49,147 C 37,146 24,141 24,133 Z" fill="#ff5e00" />
-                <path d="M 49,152 L 81,152 L 78,194 C 78,196 52,196 52,194 Z" fill="#334155" stroke="#0f172a" stroke-width="1" />
-                <line x1="50" y1="162" x2="80" y2="166" stroke="#1e293b" stroke-width="1.5" />
-                <line x1="51" y1="172" x2="79" y2="176" stroke="#1e293b" stroke-width="1.5" />
-                <line x1="51" y1="182" x2="79" y2="186" stroke="#1e293b" stroke-width="1.5" />
+                <path d="M 49,152 L 81,152 L 78,194 C 78,196 52,196 52,194 Z" fill="#111827" stroke="#000000" stroke-width="1.5" />
+                <line x1="50" y1="162" x2="80" y2="166" stroke="#374151" stroke-width="1.5" />
+                <line x1="51" y1="172" x2="79" y2="176" stroke="#374151" stroke-width="1.5" />
+                <line x1="51" y1="182" x2="79" y2="186" stroke="#374151" stroke-width="1.5" />
             </svg>
             <div class="paddle-text-overlay">
                 <span class="paddle-icon">🤖</span>
-                <span class="paddle-title">VS. AI<br>Challenge</span>
+                <span class="paddle-title" style="margin-top: 5px;">Practice Drill</span>
             </div>
         </div>
 
     </div>
 
-    <!-- 5. Navigation Layer -->
+    <!-- 5. Navigation Footer Dock -->
     <div class="bottom-nav">
         <div class="nav-item active">
             <span class="nav-icon">🏆</span><br>Ranks
@@ -301,8 +322,8 @@
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js')
-                    .then(reg => console.log('PWA active.', reg))
-                    .catch(err => console.error('PWA fault:', err));
+                    .then(reg => console.log('PWA execution profile successfully verified.', reg))
+                    .catch(err => console.error('PWA fallback engine block:', err));
             });
         }
     </script>
