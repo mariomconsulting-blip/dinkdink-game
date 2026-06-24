@@ -13,7 +13,7 @@
     
     <style>
         /* ==========================================
-           DinkDink.org - Sunlight-Optimized Mobile UI Layout
+           DinkDink.org - Anti-Overlap Mobile UI Engine
            ========================================== */
 
         :root {
@@ -22,7 +22,7 @@
             --neon-orange: #ff5e00;
             --stark-black: #000000;
             --stark-white: #ffffff;
-            --text-muted: #e2e8f0; /* Ultra-bright gray for maximum outdoor utility contrast */
+            --text-muted: #cbd5e1;
         }
 
         body {
@@ -33,16 +33,15 @@
             display: flex;
             flex-direction: column;
             
-            /* Dynamic Viewport height constraint to defeat mobile browser toolbars */
+            /* Constrain viewport height tightly to eliminate overflow bounces */
             height: 100vh;
             height: 100dvh; 
             overflow: hidden;
             
-            /* Pure high-contrast acrylic court base colors */
             background-color: var(--court-blue);
             background-image: 
-                linear-gradient(90deg, rgba(255,255,255,0.2) 2px, transparent 2px),
-                linear-gradient(0deg, rgba(255,255,255,0.2) 2px, transparent 2px);
+                linear-gradient(90deg, rgba(255,255,255,0.15) 2px, transparent 2px),
+                linear-gradient(0deg, rgba(255,255,255,0.15) 2px, transparent 2px);
             background-size: 100% 100%;
             background-position: center;
 
@@ -51,67 +50,69 @@
             touch-action: manipulation;
         }
 
-        /* --- Top Browser Context Strip --- */
+        /* --- Top System Header Line --- */
         .top-bar {
             display: flex;
             justify-content: space-between;
             padding: 12px 20px;
-            background: var(--stark-black); /* Solid black background for maximum readability outside */
+            background: var(--stark-black);
             align-items: center;
             border-bottom: 2px solid rgba(255,255,255,0.2);
         }
 
         .logo-area {
             text-align: center;
-            padding: 8px 0 0px 0;
+            padding: 6px 0 0px 0;
         }
 
         .logo-area h1 { 
             margin: 0; 
-            font-size: 34px; 
+            font-size: 32px; 
             font-weight: 900;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             color: var(--stark-white);
-            text-shadow: 0 4px 6px rgba(0,0,0,0.6);
+            text-shadow: 0 4px 6px rgba(0,0,0,0.5);
         }
 
         .live-counter { 
             color: var(--neon-green); 
             font-weight: 900; 
             font-size: 13px; 
-            margin-top: 4px; 
+            margin-top: 2px; 
             letter-spacing: 1px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
-        /* --- Center Court Graphic Canvas Window --- */
+        /* --- Graphics Window Arena Stage --- */
         .preview-container {
             flex: 1;
-            padding: 10px 24px;
+            padding: 8px 24px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             position: relative;
+            min-height: 0; /* Prevents structural flex blowout layout defects */
         }
 
+        /* Fixed broken image layout leakage shown in image_6db3a9.jpg */
         .game-preview-image {
             width: 100%;
             height: 100%;
-            max-height: 35vh;
+            max-height: 32vh;
             border-radius: 24px;
             object-fit: cover;
-            border: 4px solid var(--stark-white); /* Thicker border to make the frame pop out under glare */
-            box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.6);
+            border: 4px solid var(--stark-white);
+            box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.5);
+            background: #1e293b; /* Clean backdrop dark gray placeholder if image fails to find path */
+            color: transparent; /* Suppresses broken text overflows from leaking behind banners */
         }
 
-        /* High-Contrast "Play Anytime Anywhere" Banner Ribbon */
         .marketing-ribbon {
             position: absolute;
-            top: 25px;
+            top: 20px;
             background: var(--stark-black);
             color: var(--stark-white);
-            padding: 6px 16px;
+            padding: 6px 18px;
             border-radius: 20px;
             font-size: 12px;
             font-weight: 900;
@@ -119,26 +120,26 @@
             letter-spacing: 1px;
             border: 2px solid var(--neon-green);
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            pointer-events: none;
+            z-index: 5;
         }
 
         .chat-bubble {
             position: absolute;
-            bottom: -10px;
+            bottom: -8px;
             background: var(--stark-white);
             color: var(--stark-black);
-            padding: 8px 20px;
+            padding: 6px 18px;
             border-radius: 30px;
             font-weight: 900;
             font-size: 13px;
-            box-shadow: 0px 8px 20px rgba(0,0,0,0.4);
+            box-shadow: 0px 6px 15px rgba(0,0,0,0.4);
             border: 3px solid var(--stark-black);
-            z-index: 10;
+            z-index: 5;
         }
 
-        /* --- Vector Paddle Layout Controls --- */
+        /* --- Interactive Vector Paddles Frame --- */
         .action-area {
-            padding: 15px 20px 20px 20px;
+            padding: 10px 20px 15px 20px;
             display: flex;
             justify-content: space-around;
             gap: 15px;
@@ -151,25 +152,25 @@
             flex-direction: column;
             align-items: center;
             cursor: pointer;
-            max-width: 150px;
+            max-width: 145px;
             transition: transform 0.1s ease;
         }
 
         .paddle-wrapper:active {
-            transform: scale(0.92) translateY(4px);
+            transform: scale(0.92) translateY(2px);
         }
 
         .paddle-svg {
             width: 100%;
             height: auto;
-            filter: drop-shadow(0px 10px 8px rgba(0,0,0,0.5));
+            filter: drop-shadow(0px 8px 8px rgba(0,0,0,0.4));
         }
 
-        /* Precise Text Layout Inside Paddle Faces */
+        /* Exact Text Grid Layout Transformations Inside Paddle Faces */
         .paddle-text-overlay {
             position: absolute;
-            top: 22%; 
-            width: 82%;
+            top: 20%; 
+            width: 86%;
             text-align: center;
             pointer-events: none;
             display: flex;
@@ -179,43 +180,45 @@
         }
 
         .paddle-icon {
-            font-size: 22px;
+            font-size: 20px;
             margin-bottom: 2px;
         }
 
-        .paddle-title {
+        .paddle-row-main {
             font-size: 12px;
             font-weight: 900;
             line-height: 1.2;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.2px;
             text-transform: uppercase;
+            margin-bottom: 3px;
         }
 
-        .paddle-subtitle {
-            font-size: 9px;
+        .paddle-row-sub {
+            font-size: 10px;
             font-weight: 800;
             line-height: 1.1;
-            margin-top: 4px;
             text-transform: uppercase;
-            opacity: 0.9;
         }
 
-        /* Crisp High Contrast Text Maps for Outdoor Glare Protection */
-        .btn-online .paddle-title { color: #000000; }
-        .btn-online .paddle-subtitle { color: #000000; font-weight: 900; }
+        /* Enhanced High-Contrast Theme Settings for Outdoor Lighting Visibility */
+        .btn-online .paddle-row-main { color: #000000; }
+        .btn-online .paddle-row-sub { color: #000000; font-weight: 900; }
         
-        .btn-ai .paddle-title { color: var(--stark-white); text-shadow: 0px 2px 4px rgba(0,0,0,0.5); }
+        .btn-ai .paddle-row-main { color: var(--stark-white); text-shadow: 0px 2px 4px rgba(0,0,0,0.6); }
 
-        /* --- Solid High-Contrast Bottom Utility Strip --- */
+        /* --- Anti-Overlap Navigation Bottom Dock --- */
         .bottom-nav {
             display: flex;
             justify-content: space-around;
             align-items: center;
-            padding-top: 16px;
+            padding-top: 14px;
             padding-left: 10px;
             padding-right: 10px;
-            /* Extra safety margin padding to clear ambient phone browser interface elements */
-            padding-bottom: calc(24px + env(safe-area-inset-bottom));
+            
+            /* CRITICAL FIX: Drastically expanded bottom spacing parameters. 
+               This completely forces the navigation contents above custom web tool bars */
+            padding-bottom: calc(75px + env(safe-area-inset-bottom)); 
+            
             background: var(--stark-black); 
             border-top: 3px solid rgba(255, 255, 255, 0.2);
         }
@@ -231,7 +234,7 @@
         }
 
         .nav-item.active {
-            color: var(--neon-green); /* Green highlight indicator stands out instantly outdoors */
+            color: var(--neon-green);
         }
 
         .nav-icon {
@@ -243,35 +246,35 @@
 </head>
 <body>
 
-    <!-- 1. System Header Strip -->
+    <!-- 1. Header Toolbar Component -->
     <div class="top-bar">
         <span style="font-size: 20px; cursor: pointer;">☰</span>
         <span style="font-weight: 700; letter-spacing: 0.5px;">dinkdink.org</span>
         <span style="font-size: 20px; cursor: pointer;">⚙️</span>
     </div>
 
-    <!-- 2. Brand Positioning Section -->
+    <!-- 2. Branding/Lobby Component -->
     <div class="logo-area">
         <h1>DINK DINK!</h1>
         <div class="live-counter">🟢 PLAYERS ONLINE NOW</div>
     </div>
 
-    <!-- 3. Primary Graphics Hub Layer -->
+    <!-- 3. Central Graphical Showcase (dink court AI.jpg Layout Target) -->
     <div class="preview-container">
-        <!-- Render target using the verbatim dink court AI.jpg file context -->
+        <!-- Graphic maps directly here to dink court AI.jpg image resource path -->
         <img class="game-preview-image" src="dink court AI.jpg" alt="DinkDink Gameplay Arena Preview">
         
-        <!-- Stark marketing floating banner callout -->
+        <!-- Callout Banner Overlay -->
         <div class="marketing-ribbon">Play anytime anywhere</div>
         
         <div class="chat-bubble">Nice dink shot! 💥</div>
     </div>
 
-    <!-- 4. Conversion Action Matrix -->
+    <!-- 4. Conversion Paddles Control Center -->
     <div class="action-area">
         
-        <!-- Left Paddle Button: Matchmaking Configuration -->
-        <div class="paddle-wrapper btn-online" onclick="console.log('Online queue selected')">
+        <!-- Left Paddle: Instant Match Execution -->
+        <div class="paddle-wrapper btn-online" onclick="console.log('Instant queue activated')">
             <svg class="paddle-svg" viewBox="0 0 130 200" xmlns="http://www.w3.org/2000/svg">
                 <path d="M 15,65 C 15,15 115,15 115,65 L 110,135 C 110,145 95,150 85,152 L 85,195 C 85,198 45,198 45,195 L 45,152 C 35,150 20,145 20,135 Z" fill="#000000" stroke="#ffffff" stroke-width="1" />
                 <path d="M 19,65 C 19,21 111,21 111,65 L 106,133 C 106,141 93,146 81,147 L 81,152 L 49,152 L 49,147 C 37,146 24,141 24,133 Z" fill="#39ff14" />
@@ -282,13 +285,14 @@
             </svg>
             <div class="paddle-text-overlay">
                 <span class="paddle-icon">🏓</span>
-                <span class="paddle-title">Instant Match</span>
-                <span class="paddle-subtitle">No Login Required</span>
+                <div class="paddle-row-main">Instant Match</div>
+                <div class="paddle-row-sub">No Login</div>
+                <div class="paddle-row-sub">Required</div>
             </div>
         </div>
 
-        <!-- Right Paddle Button: Training Configuration -->
-        <div class="paddle-wrapper btn-ai" onclick="console.log('Training track selected')">
+        <!-- Right Paddle: Practice Drill Training Hub -->
+        <div class="paddle-wrapper btn-ai" onclick="console.log('Practice drill track loaded')">
             <svg class="paddle-svg" viewBox="0 0 130 200" xmlns="http://www.w3.org/2000/svg">
                 <path d="M 15,65 C 15,15 115,15 115,65 L 110,135 C 110,145 95,150 85,152 L 85,195 C 85,198 45,198 45,195 L 45,152 C 35,150 20,145 20,135 Z" fill="#000000" stroke="#ffffff" stroke-width="1" />
                 <path d="M 19,65 C 19,21 111,21 111,65 L 106,133 C 106,141 93,146 81,147 L 81,152 L 49,152 L 49,147 C 37,146 24,141 24,133 Z" fill="#ff5e00" />
@@ -297,15 +301,16 @@
                 <line x1="51" y1="172" x2="79" y2="176" stroke="#374151" stroke-width="1.5" />
                 <line x1="51" y1="182" x2="79" y2="186" stroke="#374151" stroke-width="1.5" />
             </svg>
-            <div class="paddle-text-overlay">
+            <div class="paddle-text-overlay" style="top: 25%;">
                 <span class="paddle-icon">🤖</span>
-                <span class="paddle-title" style="margin-top: 5px;">Practice Drill</span>
+                <div class="paddle-row-main">Practice</div>
+                <div class="paddle-row-main">Drill</div>
             </div>
         </div>
 
     </div>
 
-    <!-- 5. Navigation Footer Dock -->
+    <!-- 5. Shifted High-Contrast Base Navigation Layer -->
     <div class="bottom-nav">
         <div class="nav-item active">
             <span class="nav-icon">🏆</span><br>Ranks
@@ -321,9 +326,7 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(reg => console.log('PWA execution profile successfully verified.', reg))
-                    .catch(err => console.error('PWA fallback engine block:', err));
+                navigator.serviceWorker.register('/sw.js').catch(err => console.log(err));
             });
         }
     </script>
