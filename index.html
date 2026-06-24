@@ -1,17 +1,295 @@
-Yes, exactly! That code block is the **complete, fully updated `index.html` file**. It contains the structural HTML layout, the mobile viewport locks, and the newly refactored paddle button CSS styling all packaged into one single file.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Link to Web App Manifest for PWA installation -->
+    <link rel="manifest" href="/manifest.json">
 
-You do not need to create a new file or piece things together—you just use this to overwrite your existing one on GitHub.
+    <!-- iOS Specific Meta Tags for Native Screen Frame Experience -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="DinkDink">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
 
----
+    <!-- Viewport Locking (Prevents layout shifting, bouncing, and zooming during game taps) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <title>DinkDink.org - Play Pickleball Online</title>
+    
+    <style>
+        /* ==========================================
+           DinkDink.org - Optimized Mobile UI Layout
+           ========================================== */
 
-### 🛠️ How to Replace It on GitHub
+        :root {
+            --neon-green: #39ff14;
+            --neon-orange: #ff5e00;
+            --dark-panel: rgba(18, 35, 51, 0.85); /* Semi-transparent panel blending with gradient */
+            --text-light: #ffffff;
+            --text-muted: #94a3b8; /* Crisp, readable slate gray for secondary text */
+        }
 
-1. **Copy the Code:** Click the "Copy" button on the top right of the code block from the previous response.
-2. **Open the File on GitHub:** Go to your repository website and click directly on your current `index.html` file.
-3. **Enter Edit Mode:** Click the **pencil icon** in the upper right corner of the file pane to open the built-in web editor.
-4. **Wipe and Paste:** Select all of the old code currently inside the editor (Ctrl+A on Windows or Cmd+A on Mac) and hit delete. Paste the entire new code block you just copied.
-5. **Save the Changes:** Scroll down to the **Commit changes** box, add a short description like "Refactored live counter and engineered paddle buttons", and click the green **Commit changes** button.
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+            
+            /* Premium Deep Court Gradient Upgrade */
+            background: linear-gradient(180deg, #0a1118 0%, #122333 50%, #1b354b 100%);
+            background-attachment: fixed;
 
+            /* Web App Interface Locks */
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            touch-action: manipulation;
+        }
 
+        /* --- Top Browser & Branding Header --- */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: rgba(10, 17, 24, 0.5);
+            align-items: center;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
 
-Give GitHub Pages about 60 to 90 seconds to process the update. When you refresh your phone's browser (or check in an Incognito tab to bypass the old cache), your live site will instantly feature the clean player counter, optimal legibility contrast, and the custom pickleball paddle buttons for the online multi and AI challenge modes!
+        .logo-area {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .logo-area h1 { 
+            margin: 0; 
+            font-size: 32px; 
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        .live-counter { 
+            color: var(--neon-green); 
+            font-weight: 700; 
+            font-size: 14px; 
+            margin-top: 6px; 
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* --- Central Video Preview Window --- */
+        .preview-container {
+            flex: 1;
+            padding: 10px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .game-preview-video {
+            width: 100%;
+            max-height: 40vh;
+            border-radius: 20px;
+            object-fit: cover;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.6);
+            background-color: #0d151d; /* Placeholder until video source asset is introduced */
+        }
+
+        /* --- Social Chat Bubble Overlay --- */
+        .chat-bubble {
+            position: absolute;
+            bottom: 25px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #0f172a;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0px 8px 20px rgba(0,0,0,0.4);
+            animation: bounce 2s infinite;
+        }
+
+        /* --- Action Area Padding Adjusted for Paddle Handles --- */
+        .action-area {
+            padding: 10px 25px 30px 25px;
+            display: flex;
+            gap: 20px;
+        }
+
+        /* --- Authentic Pickleball Paddle Interface Engine --- */
+        .btn {
+            flex: 1;
+            position: relative; /* Context anchor for the paddle handles */
+            padding: 24px 10px; /* Height adjustment to favor a natural paddle head aspect ratio */
+            border: none;
+            cursor: pointer;
+            
+            /* Shaped exactly like a rounded pickleball paddle face */
+            border-radius: 40px 40px 16px 16px; 
+            
+            /* High-legibility typography rules */
+            font-size: 15px;
+            font-weight: 800;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 0.5px;
+            
+            box-shadow: 0px 5px 0px rgba(0, 0, 0, 0.4);
+            transition: transform 0.05s ease, box-shadow 0.05s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Downward mechanical tap depression physics */
+        .btn:active { 
+            transform: translateY(4px); 
+            box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3); 
+        }
+        
+        /* Handles sync down with button translation on active press */
+        .btn:active::after {
+            transform: translateX(-50%) translateY(-4px);
+        }
+
+        /* Global Paddle Handle (Grip Stub) Setup */
+        .btn::after {
+            content: '';
+            position: absolute;
+            bottom: -16px; /* Positions handle stub out from the bottom of the paddle face */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 16px;
+            border-radius: 0 0 3px 3px;
+            box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.4);
+            transition: transform 0.05s ease;
+        }
+
+        /* Contrasting Paddle 1: Neon Green Face + White Performance Grip */
+        .btn-online {
+            background-color: var(--neon-green);
+            color: #050b11; /* Clear Onyx contrast tone against ultra-bright green background */
+        }
+        .btn-online::after {
+            background-color: #ffffff; /* White overgrip wrap style */
+            border: 1px solid #cbd5e1;
+        }
+
+        /* Contrasting Paddle 2: Neon Orange Face + Stealth Charcoal Grip */
+        .btn-ai {
+            background-color: var(--neon-orange);
+            color: #ffffff; /* Pure white text setup for contrast readability against rich orange */
+        }
+        .btn-ai::after {
+            background-color: #1e293b; /* Premium dark grip wrap style */
+            border: 1px solid #0f172a;
+        }
+
+        /* --- High-Contrast Bottom Navigation Menu --- */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 10px calc(12px + env(safe-area-inset-bottom)); /* Safe spacing boundary for modern edge-to-edge hardware */
+            background: var(--dark-panel);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .nav-item { 
+            font-size: 12px; 
+            font-weight: 600;
+            color: var(--text-muted); 
+            text-align: center; 
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: var(--text-light);
+        }
+
+        .nav-icon {
+            font-size: 22px;
+            margin-bottom: 4px;
+            display: inline-block;
+        }
+
+        /* Keyframe Animations */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Top Navigation Context Strip -->
+    <div class="top-bar">
+        <span style="font-size: 20px; cursor: pointer;">☰</span>
+        <span style="font-weight: 600; letter-spacing: 0.5px;">dinkdink.org</span>
+        <span style="font-size: 20px; cursor: pointer;">⚙️</span>
+    </div>
+
+    <!-- 2. Main Game Branding Block & Refactored Live Social Proof -->
+    <div class="logo-area">
+        <h1>DINK DINK!</h1>
+        <div class="live-counter">🟢 PLAYERS ONLINE NOW[cite: 1, 2, 3]</div>
+    </div>
+
+    <!-- 3. Dynamic Video Preview Engine Frame -->
+    <div class="preview-container">
+        <video class="game-preview-video" autoplay loop muted playsinline>
+            <source src="gameplay-preview.mp4" type="video/mp4">
+            Your device layout handles automated game rendering loops.
+        </video>
+        <!-- Interactive community element overlay -->
+        <div class="chat-bubble">Nice dink shot! 💥[cite: 1, 2, 3]</div>
+    </div>
+
+    <!-- 4. Contrasting Paddle Selection Area -->
+    <div class="action-area">
+        <button class="btn btn-online" onclick="console.log('Initiating online live matchmaking queue...')">
+            🏓 ONLINE MULTI[cite: 1, 2, 3]
+        </button>
+        <button class="btn btn-ai" onclick="console.log('Booting localized offline AI engine...')">
+            🤖 VS. AI CHALLENGE[cite: 1, 2, 3]
+        </button>
+    </div>
+
+    <!-- 5. Upgraded High-Contrast Footprint Navigation Matrix -->
+    <div class="bottom-nav">
+        <div class="nav-item active">
+            <span class="nav-icon">🏆</span><br>Ranks
+        </div>
+        <div class="nav-item">
+            <span class="nav-icon">🎨</span><br>My Paddle[cite: 1, 2, 3]
+        </div>
+        <div class="nav-item">
+            <span class="nav-icon">🌐</span><br>Community[cite: 1, 2, 3]
+        </div>
+    </div>
+
+    <script>
+        // Automatic PWA service worker enrollment script
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('DinkDink service environment framework successfully registered.', reg))
+                    .catch(err => console.error('Service worker initialization boundary error:', err));
+            });
+        }
+    </script>
+</body>
+</html>
