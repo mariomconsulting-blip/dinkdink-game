@@ -82,12 +82,14 @@
             font-size: 13px; 
             margin-top: 2px; 
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         /* --- Graphics Window Arena Stage --- */
         .preview-container {
             flex: 1;
-            width: calc(100% - 48px); 
+            /* WIDER ARENA: Margin reduced to allow full-width stretch */
+            width: calc(100% - 16px); 
             margin: 10px auto 0 auto;
             display: flex;
             flex-direction: column;
@@ -97,19 +99,31 @@
             min-height: 0; 
         }
 
-        /* Render target for the 3D court isometric arena graphic */
-        .game-preview-image {
+        .arena-frame {
             width: 100%;
             height: 100%;
-            max-height: 33vh;
+            /* TALLER ARENA: Allowed to stretch further down the page */
+            max-height: 38vh; 
             border-radius: 20px;
-            
-            /* CHANGED: Switched to contain and added a background so the image never crops awkwardly */
-            object-fit: contain; 
-            background-color: var(--stark-black); 
-            
             border: 4px solid var(--stark-white);
             box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.5);
+            background-color: var(--stark-black);
+            
+            /* Clips the rotated image so it stays perfectly inside the rounded borders */
+            overflow: hidden; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Render target for the 90-degree rotated court */
+        .game-preview-image {
+            position: absolute;
+            width: 100vh; /* Scaled safely beyond the bounds of the box */
+            height: 100vw; 
+            transform: rotate(90deg); /* 90 DEGREE ROTATION APPLIED */
+            object-fit: contain; 
         }
 
         .chat-bubble {
@@ -151,7 +165,8 @@
 
         /* --- Interactive Vector Paddles Frame --- */
         .action-area {
-            padding: 15px 20px 15px 20px;
+            /* Tighter padding allows the paddles to sit lower, making space for the bigger arena */
+            padding: 10px 15px 15px 15px; 
             display: flex;
             justify-content: space-around;
             gap: 15px;
@@ -164,7 +179,8 @@
             flex-direction: column;
             align-items: center;
             cursor: pointer;
-            max-width: 145px;
+            /* SMALLER PADDLES: Maximum scaling reduced to increase UI real estate above */
+            max-width: 120px; 
             transition: transform 0.1s ease;
         }
 
@@ -220,11 +236,7 @@
         .btn-online .paddle-row-sub { color: #000000; font-weight: 900; }
         
         .btn-ai .paddle-row-main { color: var(--stark-white); text-shadow: 0px 1.5px 3px rgba(0,0,0,0.7); }
-        
-        /* CHANGED: Added high-contrast glow behind the practice drill paddle icon */
-        .btn-ai .paddle-icon { 
-            filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 1)); 
-        }
+        .btn-ai .paddle-icon { filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 1)); }
 
         /* --- Bottom Navigation Dock --- */
         .bottom-nav {
@@ -300,11 +312,13 @@
 
     <div class="logo-area">
         <h1>DINK DINK!</h1>
-        <div class="live-counter">🟢 PLAYERS ONLINE NOW</div>
+        <div class="live-counter">🟢 PLAY ONLINE NOW</div>
     </div>
 
     <div class="preview-container">
-        <img class="game-preview-image" src="dinkcourt1.jpg" alt="DinkDink Gameplay Arena Preview">
+        <div class="arena-frame">
+            <img class="game-preview-image" src="dinkcourt1.jpg" alt="DinkDink Gameplay Arena Preview">
+        </div>
         <div class="chat-bubble">Nice dink shot! 💥</div>
     </div>
 
@@ -316,12 +330,12 @@
         
         <div class="paddle-wrapper btn-online" onclick="console.log('Instant queue activated')">
             <svg class="paddle-svg" viewBox="0 0 130 200" xmlns="http://www.w3.org/2000/svg">
-                <path d="M 15,65 C 15,15 115,15 115,65 L 110,135 C 110,145 95,150 85,152 L 85,195 C 85,198 45,198 45,195 L 45,152 C 35,150 20,145 20,135 Z" fill="#000000" stroke="#ffffff" stroke-width="1" />
-                <path d="M 19,65 C 19,21 111,21 111,65 L 106,133 C 106,141 93,146 81,147 L 81,152 L 49,152 L 49,147 C 37,146 24,141 24,133 Z" fill="#39ff14" />
-                <path d="M 49,152 L 81,152 L 78,194 C 78,196 52,196 52,194 Z" fill="#ffffff" stroke="#000000" stroke-width="1.5" />
-                <line x1="50" y1="162" x2="80" y2="166" stroke="#000000" stroke-width="1.5" />
-                <line x1="51" y1="172" x2="79" y2="176" stroke="#000000" stroke-width="1.5" />
-                <line x1="51" y1="182" x2="79" y2="186" stroke="#000000" stroke-width="1.5" />
+                <path d="M 15,65 C 15,15 115,15 115,65 L 110,135 C 110,145 95,150 77,152 L 77,195 C 77,198 53,198 53,195 L 53,152 C 35,150 20,145 20,135 Z" fill="#000000" stroke="#ffffff" stroke-width="1" />
+                <path d="M 19,65 C 19,21 111,21 111,65 L 106,133 C 106,141 93,146 73,147 L 73,152 L 57,152 L 57,147 C 37,146 24,141 24,133 Z" fill="#39ff14" />
+                <path d="M 57,152 L 73,152 L 71,194 C 71,196 59,196 59,194 Z" fill="#ffffff" stroke="#000000" stroke-width="1.5" />
+                <line x1="58" y1="162" x2="72" y2="166" stroke="#000000" stroke-width="1.5" />
+                <line x1="58" y1="172" x2="72" y2="176" stroke="#000000" stroke-width="1.5" />
+                <line x1="58" y1="182" x2="72" y2="186" stroke="#000000" stroke-width="1.5" />
             </svg>
             <div class="paddle-text-overlay">
                 <span class="paddle-icon">🏓</span>
@@ -333,12 +347,12 @@
 
         <div class="paddle-wrapper btn-ai" onclick="console.log('Practice drill track loaded')">
             <svg class="paddle-svg" viewBox="0 0 130 200" xmlns="http://www.w3.org/2000/svg">
-                <path d="M 15,65 C 15,15 115,15 115,65 L 110,135 C 110,145 95,150 85,152 L 85,195 C 85,198 45,198 45,195 L 45,152 C 35,150 20,145 20,135 Z" fill="#000000" stroke="#ffffff" stroke-width="1" />
-                <path d="M 19,65 C 19,21 111,21 111,65 L 106,133 C 106,141 93,146 81,147 L 81,152 L 49,152 L 49,147 C 37,146 24,141 24,133 Z" fill="#ff5e00" />
-                <path d="M 49,152 L 81,152 L 78,194 C 78,196 52,196 52,194 Z" fill="#111827" stroke="#000000" stroke-width="1.5" />
-                <line x1="50" y1="162" x2="80" y2="166" stroke="#374151" stroke-width="1.5" />
-                <line x1="51" y1="172" x2="79" y2="176" stroke="#374151" stroke-width="1.5" />
-                <line x1="51" y1="182" x2="79" y2="186" stroke="#374151" stroke-width="1.5" />
+                <path d="M 15,65 C 15,15 115,15 115,65 L 110,135 C 110,145 95,150 77,152 L 77,195 C 77,198 53,198 53,195 L 53,152 C 35,150 20,145 20,135 Z" fill="#000000" stroke="#ffffff" stroke-width="1" />
+                <path d="M 19,65 C 19,21 111,21 111,65 L 106,133 C 106,141 93,146 73,147 L 73,152 L 57,152 L 57,147 C 37,146 24,141 24,133 Z" fill="#ff5e00" />
+                <path d="M 57,152 L 73,152 L 71,194 C 71,196 59,196 59,194 Z" fill="#111827" stroke="#000000" stroke-width="1.5" />
+                <line x1="58" y1="162" x2="72" y2="166" stroke="#374151" stroke-width="1.5" />
+                <line x1="58" y1="172" x2="72" y2="176" stroke="#374151" stroke-width="1.5" />
+                <line x1="58" y1="182" x2="72" y2="186" stroke="#374151" stroke-width="1.5" />
             </svg>
             <div class="paddle-text-overlay" style="top: 25%;">
                 <span class="paddle-icon">🏓</span>
@@ -350,14 +364,14 @@
     </div>
 
     <div class="bottom-nav">
-        <div class="nav-item active">
-            <span class="nav-icon">🏆</span><br>Ranks
+        <div class="nav-item">
+            <span class="nav-icon">🌐</span><br>Community
         </div>
         <div class="nav-item">
             <span class="nav-icon">🎨</span><br>My Paddle
         </div>
-        <div class="nav-item">
-            <span class="nav-icon">🌐</span><br>Community
+        <div class="nav-item active">
+            <span class="nav-icon">🏆</span><br>Ranks
         </div>
     </div>
 
