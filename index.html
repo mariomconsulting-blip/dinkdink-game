@@ -13,11 +13,12 @@
     
     <style>
         /* ==========================================
-           DinkDink.org - Anti-Overlap Mobile UI Engine
+           DinkDink.org - High-Contrast Mobile Engine
            ========================================== */
 
         :root {
             --court-blue: #0077c8;
+            --court-green: #22c55e;
             --neon-green: #39ff14;
             --neon-orange: #ff5e00;
             --stark-black: #000000;
@@ -32,16 +33,14 @@
             color: var(--stark-white);
             display: flex;
             flex-direction: column;
-            
-            /* Constrain viewport height tightly to eliminate overflow bounces */
             height: 100vh;
             height: 100dvh; 
             overflow: hidden;
             
             background-color: var(--court-blue);
             background-image: 
-                linear-gradient(90deg, rgba(255,255,255,0.15) 2px, transparent 2px),
-                linear-gradient(0deg, rgba(255,255,255,0.15) 2px, transparent 2px);
+                linear-gradient(90deg, rgba(255,255,255,0.12) 2px, transparent 2px),
+                linear-gradient(0deg, rgba(255,255,255,0.12) 2px, transparent 2px);
             background-size: 100% 100%;
             background-position: center;
 
@@ -91,10 +90,9 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            min-height: 0; /* Prevents structural flex blowout layout defects */
+            min-height: 0; 
         }
 
-        /* Fixed broken image layout leakage shown in image_6db3a9.jpg */
         .game-preview-image {
             width: 100%;
             height: 100%;
@@ -103,8 +101,11 @@
             object-fit: cover;
             border: 4px solid var(--stark-white);
             box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.5);
-            background: #1e293b; /* Clean backdrop dark gray placeholder if image fails to find path */
-            color: transparent; /* Suppresses broken text overflows from leaking behind banners */
+            
+            /* High-fidelity fallback styling while assets resolve */
+            background-color: #155e75;
+            background-image: radial-gradient(circle at 50% 120%, var(--court-green) 20%, transparent 80%);
+            color: transparent; 
         }
 
         .marketing-ribbon {
@@ -166,11 +167,12 @@
             filter: drop-shadow(0px 8px 8px rgba(0,0,0,0.4));
         }
 
-        /* Exact Text Grid Layout Transformations Inside Paddle Faces */
         .paddle-text-overlay {
             position: absolute;
-            top: 20%; 
-            width: 86%;
+            top: 22%; 
+            width: 100%;
+            padding: 0 8px;
+            box-sizing: border-box;
             text-align: center;
             pointer-events: none;
             display: flex;
@@ -180,33 +182,33 @@
         }
 
         .paddle-icon {
-            font-size: 20px;
-            margin-bottom: 2px;
-        }
-
-        .paddle-row-main {
-            font-size: 12px;
-            font-weight: 900;
-            line-height: 1.2;
-            letter-spacing: 0.2px;
-            text-transform: uppercase;
+            font-size: 18px;
             margin-bottom: 3px;
         }
 
-        .paddle-row-sub {
-            font-size: 10px;
-            font-weight: 800;
-            line-height: 1.1;
+        .paddle-row-main {
+            font-size: 11px;
+            font-weight: 900;
+            line-height: 1.2;
+            letter-spacing: 0.1px;
             text-transform: uppercase;
+            white-space: nowrap;
         }
 
-        /* Enhanced High-Contrast Theme Settings for Outdoor Lighting Visibility */
+        .paddle-row-sub {
+            font-size: 9.5px;
+            font-weight: 800;
+            line-height: 1.2;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
         .btn-online .paddle-row-main { color: #000000; }
         .btn-online .paddle-row-sub { color: #000000; font-weight: 900; }
         
-        .btn-ai .paddle-row-main { color: var(--stark-white); text-shadow: 0px 2px 4px rgba(0,0,0,0.6); }
+        .btn-ai .paddle-row-main { color: var(--stark-white); text-shadow: 0px 1.5px 3px rgba(0,0,0,0.7); }
 
-        /* --- Anti-Overlap Navigation Bottom Dock --- */
+        /* --- Anti-Overlap Navigation Dock --- */
         .bottom-nav {
             display: flex;
             justify-content: space-around;
@@ -214,11 +216,7 @@
             padding-top: 14px;
             padding-left: 10px;
             padding-right: 10px;
-            
-            /* CRITICAL FIX: Drastically expanded bottom spacing parameters. 
-               This completely forces the navigation contents above custom web tool bars */
             padding-bottom: calc(75px + env(safe-area-inset-bottom)); 
-            
             background: var(--stark-black); 
             border-top: 3px solid rgba(255, 255, 255, 0.2);
         }
@@ -246,34 +244,27 @@
 </head>
 <body>
 
-    <!-- 1. Header Toolbar Component -->
     <div class="top-bar">
         <span style="font-size: 20px; cursor: pointer;">☰</span>
         <span style="font-weight: 700; letter-spacing: 0.5px;">dinkdink.org</span>
         <span style="font-size: 20px; cursor: pointer;">⚙️</span>
     </div>
 
-    <!-- 2. Branding/Lobby Component -->
     <div class="logo-area">
         <h1>DINK DINK!</h1>
         <div class="live-counter">🟢 PLAYERS ONLINE NOW</div>
     </div>
 
-    <!-- 3. Central Graphical Showcase (dink court AI.jpg Layout Target) -->
     <div class="preview-container">
-        <!-- Graphic maps directly here to dink court AI.jpg image resource path -->
-        <img class="game-preview-image" src="dink court AI.jpg" alt="DinkDink Gameplay Arena Preview">
+        <img class="game-preview-image" src="dink-court-ai.png" alt="DinkDink Gameplay Arena Preview">
         
-        <!-- Callout Banner Overlay -->
         <div class="marketing-ribbon">Play anytime anywhere</div>
         
         <div class="chat-bubble">Nice dink shot! 💥</div>
     </div>
 
-    <!-- 4. Conversion Paddles Control Center -->
     <div class="action-area">
         
-        <!-- Left Paddle: Instant Match Execution -->
         <div class="paddle-wrapper btn-online" onclick="console.log('Instant queue activated')">
             <svg class="paddle-svg" viewBox="0 0 130 200" xmlns="http://www.w3.org/2000/svg">
                 <path d="M 15,65 C 15,15 115,15 115,65 L 110,135 C 110,145 95,150 85,152 L 85,195 C 85,198 45,198 45,195 L 45,152 C 35,150 20,145 20,135 Z" fill="#000000" stroke="#ffffff" stroke-width="1" />
@@ -291,7 +282,6 @@
             </div>
         </div>
 
-        <!-- Right Paddle: Practice Drill Training Hub -->
         <div class="paddle-wrapper btn-ai" onclick="console.log('Practice drill track loaded')">
             <svg class="paddle-svg" viewBox="0 0 130 200" xmlns="http://www.w3.org/2000/svg">
                 <path d="M 15,65 C 15,15 115,15 115,65 L 110,135 C 110,145 95,150 85,152 L 85,195 C 85,198 45,198 45,195 L 45,152 C 35,150 20,145 20,135 Z" fill="#000000" stroke="#ffffff" stroke-width="1" />
@@ -310,7 +300,6 @@
 
     </div>
 
-    <!-- 5. Shifted High-Contrast Base Navigation Layer -->
     <div class="bottom-nav">
         <div class="nav-item active">
             <span class="nav-icon">🏆</span><br>Ranks
