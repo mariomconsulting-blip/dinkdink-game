@@ -62,12 +62,16 @@
             border-bottom: 2px solid rgba(255,255,255,0.2);
         }
 
-        .logo-area {
+        /* --- Updated Stacked Header Area --- */
+        .header-titles {
             text-align: center;
-            padding: 6px 0 0px 0;
+            padding: 12px 0 5px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
         }
 
-        .logo-area h1 { 
+        .header-titles h1 { 
             margin: 0; 
             font-size: 32px; 
             font-weight: 900;
@@ -79,108 +83,69 @@
         .live-counter { 
             color: var(--neon-green); 
             font-weight: 900; 
-            font-size: 13px; 
-            margin-top: 2px; 
+            font-size: 14px; 
             letter-spacing: 1px;
             text-transform: uppercase;
         }
 
-        /* --- Graphics Window Arena Stage --- */
-        .preview-container {
-            flex: 1;
-            /* WIDER ARENA: Margin reduced to allow full-width stretch */
-            width: calc(100% - 16px); 
-            margin: 10px auto 0 auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            min-height: 0; 
+        .tagline {
+            color: var(--stark-white);
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-style: italic;
+            text-transform: capitalize;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
-        .arena-frame {
-            width: 100%;
-            height: 100%;
-            /* TALLER ARENA: Allowed to stretch further down the page */
-            max-height: 38vh; 
+        /* --- Wireframe Main Content Split Layout --- */
+        .main-layout {
+            display: flex;
+            flex-direction: row;
+            flex: 1; 
+            padding: 10px 15px 15px 15px;
+            gap: 15px;
+            min-height: 0; /* Critical for inner scrolling/flex limits */
+            align-items: stretch; /* Make both columns fill the height */
+        }
+
+        /* Left side: Arena Container */
+        .arena-container {
+            flex: 1.3; /* Takes up slightly more width (~60%) */
+            position: relative;
             border-radius: 20px;
             border: 4px solid var(--stark-white);
             box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.5);
             background-color: var(--stark-black);
-            
-            /* Clips the rotated image so it stays perfectly inside the rounded borders */
             overflow: hidden; 
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
         }
 
-        /* Render target for the 90-degree rotated court */
         .game-preview-image {
-            position: absolute;
-            width: 100vh; /* Scaled safely beyond the bounds of the box */
-            height: 100vw; 
-            transform: rotate(90deg); /* 90 DEGREE ROTATION APPLIED */
-            object-fit: contain; 
-        }
-
-        .chat-bubble {
-            position: absolute;
-            bottom: -12px;
-            background: var(--stark-white);
-            color: var(--stark-black);
-            padding: 6px 18px;
-            border-radius: 30px;
-            font-weight: 900;
-            font-size: 13px;
-            box-shadow: 0px 6px 15px rgba(0,0,0,0.4);
-            border: 3px solid var(--stark-black);
-            z-index: 5;
-        }
-
-        /* --- Middle Tagline Badge --- */
-        .tagline-wrapper {
-            display: flex;
-            justify-content: center;
             width: 100%;
-            margin-top: 22px; 
-            margin-bottom: -5px; 
-            z-index: 10;
+            height: 100%;
+            object-fit: cover; /* Fills the portrait box perfectly */
         }
 
-        .tagline-badge {
-            background-color: var(--stark-black);
-            color: var(--stark-white);
-            border: 2px solid var(--neon-green);
-            padding: 6px 18px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 900;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            box-shadow: 0px 4px 10px rgba(0,0,0,0.5);
-        }
-
-        /* --- Interactive Vector Paddles Frame --- */
-        .action-area {
-            /* Tighter padding allows the paddles to sit lower, making space for the bigger arena */
-            padding: 10px 15px 15px 15px; 
+        /* Right side: Vertically Stacked Paddles */
+        .paddles-container {
+            flex: 0.8; /* Takes up remaining width (~40%) */
             display: flex;
-            justify-content: space-around;
-            gap: 15px;
+            flex-direction: column;
+            justify-content: space-evenly; /* Evenly spaces the stacked paddles */
+            align-items: center;
         }
 
         .paddle-wrapper {
-            flex: 1;
+            width: 100%;
+            max-width: 120px; /* Constrain max width for aesthetics */
             position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
             cursor: pointer;
-            /* SMALLER PADDLES: Maximum scaling reduced to increase UI real estate above */
-            max-width: 120px; 
             transition: transform 0.1s ease;
         }
 
@@ -197,7 +162,7 @@
         /* Exact Text Grid Layout Transformations Inside Paddle Faces */
         .paddle-text-overlay {
             position: absolute;
-            top: 20%; 
+            top: 18%; 
             width: 100%;
             padding: 0 8px;
             box-sizing: border-box;
@@ -210,12 +175,12 @@
         }
 
         .paddle-icon {
-            font-size: 18px;
-            margin-bottom: 3px;
+            font-size: 16px;
+            margin-bottom: 2px;
         }
 
         .paddle-row-main {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 900;
             line-height: 1.2;
             letter-spacing: 0.1px;
@@ -224,7 +189,7 @@
         }
 
         .paddle-row-sub {
-            font-size: 9.5px;
+            font-size: 8.5px;
             font-weight: 800;
             line-height: 1.2;
             text-transform: uppercase;
@@ -310,57 +275,54 @@
         <span style="font-size: 20px; cursor: pointer;">⚙️</span>
     </div>
 
-    <div class="logo-area">
+    <div class="header-titles">
         <h1>DINK DINK!</h1>
         <div class="live-counter">🟢 PLAY ONLINE NOW</div>
+        <div class="tagline">Play Anytime Anywhere</div>
     </div>
 
-    <div class="preview-container">
-        <div class="arena-frame">
-            <img class="game-preview-image" src="dinkcourt1.jpg" alt="DinkDink Gameplay Arena Preview">
-        </div>
-        <div class="chat-bubble">Nice dink shot! 💥</div>
-    </div>
-
-    <div class="tagline-wrapper">
-        <div class="tagline-badge">PLAY ANYTIME ANYWHERE</div>
-    </div>
-
-    <div class="action-area">
+    <div class="main-layout">
         
-        <div class="paddle-wrapper btn-online" onclick="console.log('Instant queue activated')">
-            <svg class="paddle-svg" viewBox="0 0 130 200" xmlns="http://www.w3.org/2000/svg">
-                <path d="M 15,65 C 15,15 115,15 115,65 L 110,135 C 110,145 95,150 77,152 L 77,195 C 77,198 53,198 53,195 L 53,152 C 35,150 20,145 20,135 Z" fill="#000000" stroke="#ffffff" stroke-width="1" />
-                <path d="M 19,65 C 19,21 111,21 111,65 L 106,133 C 106,141 93,146 73,147 L 73,152 L 57,152 L 57,147 C 37,146 24,141 24,133 Z" fill="#39ff14" />
-                <path d="M 57,152 L 73,152 L 71,194 C 71,196 59,196 59,194 Z" fill="#ffffff" stroke="#000000" stroke-width="1.5" />
-                <line x1="58" y1="162" x2="72" y2="166" stroke="#000000" stroke-width="1.5" />
-                <line x1="58" y1="172" x2="72" y2="176" stroke="#000000" stroke-width="1.5" />
-                <line x1="58" y1="182" x2="72" y2="186" stroke="#000000" stroke-width="1.5" />
-            </svg>
-            <div class="paddle-text-overlay">
-                <span class="paddle-icon">🏓</span>
-                <div class="paddle-row-main">Online Match</div>
-                <div class="paddle-row-sub">No Login</div>
-                <div class="paddle-row-sub">Required</div>
-            </div>
+        <div class="arena-container">
+            <img class="game-preview-image" src="dinkcourt2.png" alt="DinkDink Gameplay Arena Preview">
         </div>
 
-        <div class="paddle-wrapper btn-ai" onclick="console.log('Practice drill track loaded')">
-            <svg class="paddle-svg" viewBox="0 0 130 200" xmlns="http://www.w3.org/2000/svg">
-                <path d="M 15,65 C 15,15 115,15 115,65 L 110,135 C 110,145 95,150 77,152 L 77,195 C 77,198 53,198 53,195 L 53,152 C 35,150 20,145 20,135 Z" fill="#000000" stroke="#ffffff" stroke-width="1" />
-                <path d="M 19,65 C 19,21 111,21 111,65 L 106,133 C 106,141 93,146 73,147 L 73,152 L 57,152 L 57,147 C 37,146 24,141 24,133 Z" fill="#ff5e00" />
-                <path d="M 57,152 L 73,152 L 71,194 C 71,196 59,196 59,194 Z" fill="#111827" stroke="#000000" stroke-width="1.5" />
-                <line x1="58" y1="162" x2="72" y2="166" stroke="#374151" stroke-width="1.5" />
-                <line x1="58" y1="172" x2="72" y2="176" stroke="#374151" stroke-width="1.5" />
-                <line x1="58" y1="182" x2="72" y2="186" stroke="#374151" stroke-width="1.5" />
-            </svg>
-            <div class="paddle-text-overlay" style="top: 25%;">
-                <span class="paddle-icon">🏓</span>
-                <div class="paddle-row-main">Practice</div>
-                <div class="paddle-row-main">Drill</div>
+        <div class="paddles-container">
+            
+            <div class="paddle-wrapper btn-online" onclick="console.log('Instant queue activated')">
+                <svg class="paddle-svg" viewBox="0 0 130 200" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 15,65 C 15,15 115,15 115,65 L 110,135 C 110,145 95,150 77,152 L 77,195 C 77,198 53,198 53,195 L 53,152 C 35,150 20,145 20,135 Z" fill="#000000" stroke="#ffffff" stroke-width="1" />
+                    <path d="M 19,65 C 19,21 111,21 111,65 L 106,133 C 106,141 93,146 73,147 L 73,152 L 57,152 L 57,147 C 37,146 24,141 24,133 Z" fill="#39ff14" />
+                    <path d="M 57,152 L 73,152 L 71,194 C 71,196 59,196 59,194 Z" fill="#ffffff" stroke="#000000" stroke-width="1.5" />
+                    <line x1="58" y1="162" x2="72" y2="166" stroke="#000000" stroke-width="1.5" />
+                    <line x1="58" y1="172" x2="72" y2="176" stroke="#000000" stroke-width="1.5" />
+                    <line x1="58" y1="182" x2="72" y2="186" stroke="#000000" stroke-width="1.5" />
+                </svg>
+                <div class="paddle-text-overlay">
+                    <span class="paddle-icon">🏓</span>
+                    <div class="paddle-row-main">Online Match</div>
+                    <div class="paddle-row-sub">No Login</div>
+                    <div class="paddle-row-sub">Needed</div>
+                </div>
             </div>
-        </div>
 
+            <div class="paddle-wrapper btn-ai" onclick="console.log('Practice drill track loaded')">
+                <svg class="paddle-svg" viewBox="0 0 130 200" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 15,65 C 15,15 115,15 115,65 L 110,135 C 110,145 95,150 77,152 L 77,195 C 77,198 53,198 53,195 L 53,152 C 35,150 20,145 20,135 Z" fill="#000000" stroke="#ffffff" stroke-width="1" />
+                    <path d="M 19,65 C 19,21 111,21 111,65 L 106,133 C 106,141 93,146 73,147 L 73,152 L 57,152 L 57,147 C 37,146 24,141 24,133 Z" fill="#ff5e00" />
+                    <path d="M 57,152 L 73,152 L 71,194 C 71,196 59,196 59,194 Z" fill="#111827" stroke="#000000" stroke-width="1.5" />
+                    <line x1="58" y1="162" x2="72" y2="166" stroke="#374151" stroke-width="1.5" />
+                    <line x1="58" y1="172" x2="72" y2="176" stroke="#374151" stroke-width="1.5" />
+                    <line x1="58" y1="182" x2="72" y2="186" stroke="#374151" stroke-width="1.5" />
+                </svg>
+                <div class="paddle-text-overlay" style="top: 25%;">
+                    <span class="paddle-icon">🏓</span>
+                    <div class="paddle-row-main">Practice</div>
+                    <div class="paddle-row-main">Drill</div>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <div class="bottom-nav">
