@@ -87,7 +87,7 @@
         /* --- Graphics Window Arena Stage --- */
         .preview-container {
             flex: 1;
-            width: calc(100% - 48px); /* Explicit bounding box accounting for screen padding */
+            width: calc(100% - 48px); 
             margin: 10px auto 0 auto;
             display: flex;
             flex-direction: column;
@@ -103,10 +103,13 @@
             height: 100%;
             max-height: 33vh;
             border-radius: 20px;
-            object-fit: cover;
+            
+            /* CHANGED: Switched to contain and added a background so the image never crops awkwardly */
+            object-fit: contain; 
+            background-color: var(--stark-black); 
+            
             border: 4px solid var(--stark-white);
             box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.5);
-            background-color: #1a1a1a; /* Fallback anchoring block */
         }
 
         .chat-bubble {
@@ -217,6 +220,11 @@
         .btn-online .paddle-row-sub { color: #000000; font-weight: 900; }
         
         .btn-ai .paddle-row-main { color: var(--stark-white); text-shadow: 0px 1.5px 3px rgba(0,0,0,0.7); }
+        
+        /* CHANGED: Added high-contrast glow behind the practice drill paddle icon */
+        .btn-ai .paddle-icon { 
+            filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 1)); 
+        }
 
         /* --- Bottom Navigation Dock --- */
         .bottom-nav {
@@ -257,12 +265,12 @@
             flex-direction: row;
             justify-content: center;
             align-items: center;
-            flex-wrap: wrap; /* Allows safe overflow if screen is extremely thin */
+            flex-wrap: wrap; 
             gap: 6px 10px;
             background-color: var(--stark-black);
             border-top: 1px solid rgba(255,255,255,0.1);
             color: var(--text-muted);
-            font-size: 8.5px; /* Reduced for neatness */
+            font-size: 8.5px; 
             font-weight: 700;
             padding-top: 12px;
             
@@ -274,7 +282,7 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             cursor: pointer;
-            white-space: nowrap; /* Prevents text from breaking onto a second line awkwardly */
+            white-space: nowrap; 
         }
 
         .footer-divider {
@@ -358,7 +366,7 @@
         <span class="footer-divider">|</span>
         <span>Privacy Policy</span>
         <span class="footer-divider">|</span>
-        <span>Copyright © 2026 MarioM Consulting</span>
+        <span>Copyright © 2026 Adrien Marsden</span>
     </div>
 
     <script>
