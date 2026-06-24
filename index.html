@@ -2,92 +2,94 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Link to Web App Manifest for PWA installation -->
     <link rel="manifest" href="/manifest.json">
-
-    <!-- iOS Specific Meta Tags for Native Screen Frame Experience -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="DinkDink">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
-
-    <!-- Viewport Locking (Prevents layout shifting, bouncing, and zooming during game taps) -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     
     <title>DinkDink.org - Play Pickleball Online</title>
     
     <style>
         /* ==========================================
-           DinkDink.org - Optimized Mobile UI Layout
+           DinkDink.org - Premium Court UI Engine
            ========================================== */
 
         :root {
+            --court-blue: #0077c8;
+            --court-green: #22c55e;
             --neon-green: #39ff14;
             --neon-orange: #ff5e00;
-            --dark-panel: rgba(18, 35, 51, 0.85); /* Semi-transparent panel blending with gradient */
+            --text-dark: #0f172a;
             --text-light: #ffffff;
-            --text-muted: #94a3b8; /* Crisp, readable slate gray for secondary text */
         }
 
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             color: var(--text-light);
             display: flex;
             flex-direction: column;
             height: 100vh;
             overflow: hidden;
             
-            /* Premium Deep Court Gradient Upgrade */
-            background: linear-gradient(180deg, #0a1118 0%, #122333 50%, #1b354b 100%);
-            background-attachment: fixed;
+            /* Authentic Acrylic Sport Court Background Layout */
+            background-color: var(--court-blue);
+            background-image: 
+                /* White Court Sidelines / Kitchen Line Accents */
+                linear-gradient(90deg, rgba(255,255,255,0.15) 2px, transparent 2px),
+                linear-gradient(0deg, rgba(255,255,255,0.15) 2px, transparent 2px),
+                /* Dynamic lighting gradient to simulate an outdoor stadium light drop */
+                radial-gradient(circle at 50% 30%, rgba(255,255,255,0.2) 0%, rgba(15,23,42,0.4) 100%);
+            background-size: 100% 100%, 100% 100%, auto;
+            background-position: center;
 
-            /* Web App Interface Locks */
             -webkit-user-select: none;
-            -ms-user-select: none;
             user-select: none;
-            -webkit-touch-callout: none;
             touch-action: manipulation;
         }
 
-        /* --- Top Browser & Branding Header --- */
+        /* --- Top Navigation Bar --- */
         .top-bar {
             display: flex;
             justify-content: space-between;
             padding: 15px 20px;
-            background: rgba(10, 17, 24, 0.5);
+            background: rgba(15, 23, 42, 0.6);
             align-items: center;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .logo-area {
             text-align: center;
-            padding: 10px 0;
+            padding: 15px 0 5px 0;
         }
 
         .logo-area h1 { 
             margin: 0; 
-            font-size: 32px; 
+            font-size: 36px; 
             font-weight: 900;
-            letter-spacing: 2px;
-            text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            letter-spacing: 1px;
+            color: var(--text-light);
+            text-shadow: 0 4px 8px rgba(0,0,0,0.4);
         }
 
         .live-counter { 
             color: var(--neon-green); 
-            font-weight: 700; 
+            font-weight: 800; 
             font-size: 14px; 
-            margin-top: 6px; 
-            letter-spacing: 0.5px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            margin-top: 4px; 
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
-        /* --- Central Video Preview Window --- */
+        /* --- Video Arena Container --- */
         .preview-container {
             flex: 1;
-            padding: 10px 20px;
+            padding: 10px 24px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -97,119 +99,100 @@
 
         .game-preview-video {
             width: 100%;
-            max-height: 40vh;
-            border-radius: 20px;
+            max-height: 38vh;
+            border-radius: 24px;
             object-fit: cover;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.6);
-            background-color: #0d151d; /* Placeholder until video source asset is introduced */
+            border: 3px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.5);
+            background-color: rgba(15, 23, 42, 0.8);
         }
 
-        /* --- Social Chat Bubble Overlay --- */
         .chat-bubble {
             position: absolute;
-            bottom: 25px;
-            background: rgba(255, 255, 255, 0.95);
-            color: #0f172a;
-            padding: 10px 20px;
+            bottom: -5px;
+            background: #ffffff;
+            color: var(--text-dark);
+            padding: 10px 22px;
             border-radius: 30px;
-            font-weight: 700;
-            font-size: 14px;
-            box-shadow: 0px 8px 20px rgba(0,0,0,0.4);
-            animation: bounce 2s infinite;
-        }
-
-        /* --- Action Area Padding Adjusted for Paddle Handles --- */
-        .action-area {
-            padding: 10px 25px 30px 25px;
-            display: flex;
-            gap: 20px;
-        }
-
-        /* --- Authentic Pickleball Paddle Interface Engine --- */
-        .btn {
-            flex: 1;
-            position: relative; /* Context anchor for the paddle handles */
-            padding: 24px 10px; /* Height adjustment to favor a natural paddle head aspect ratio */
-            border: none;
-            cursor: pointer;
-            
-            /* Shaped exactly like a rounded pickleball paddle face */
-            border-radius: 40px 40px 16px 16px; 
-            
-            /* High-legibility typography rules */
-            font-size: 15px;
             font-weight: 800;
-            text-transform: uppercase;
-            text-align: center;
-            letter-spacing: 0.5px;
-            
-            box-shadow: 0px 5px 0px rgba(0, 0, 0, 0.4);
-            transition: transform 0.05s ease, box-shadow 0.05s ease;
+            font-size: 14px;
+            box-shadow: 0px 8px 24px rgba(0,0,0,0.3);
+            animation: bounce 2.5s infinite;
+            border: 2px solid var(--text-dark);
+            z-index: 10;
+        }
+
+        /* --- Authentic Vector Paddle Controls --- */
+        .action-area {
+            padding: 20px 20px 35px 20px;
             display: flex;
+            justify-content: space-around;
+            gap: 15px;
+        }
+
+        .paddle-wrapper {
+            flex: 1;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            max-width: 160px;
+            transition: transform 0.1s ease;
+        }
+
+        .paddle-wrapper:active {
+            transform: scale(0.92) translateY(4px);
+        }
+
+        .paddle-svg {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0px 12px 12px rgba(0,0,0,0.4));
+        }
+
+        /* High Visibility Interactive Overlays Centered on Paddle Face */
+        .paddle-text-overlay {
+            position: absolute;
+            top: 28%; /* Keeps text centered directly inside the wide paddle head face */
+            width: 85%;
+            text-align: center;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
         }
 
-        /* Downward mechanical tap depression physics */
-        .btn:active { 
-            transform: translateY(4px); 
-            box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3); 
-        }
-        
-        /* Handles sync down with button translation on active press */
-        .btn:active::after {
-            transform: translateX(-50%) translateY(-4px);
+        .paddle-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
         }
 
-        /* Global Paddle Handle (Grip Stub) Setup */
-        .btn::after {
-            content: '';
-            position: absolute;
-            bottom: -16px; /* Positions handle stub out from the bottom of the paddle face */
-            left: 50%;
-            transform: translateX(-50%);
-            width: 14px;
-            height: 16px;
-            border-radius: 0 0 3px 3px;
-            box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.4);
-            transition: transform 0.05s ease;
+        .paddle-title {
+            font-size: 14px;
+            font-weight: 900;
+            line-height: 1.2;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
-        /* Contrasting Paddle 1: Neon Green Face + White Performance Grip */
-        .btn-online {
-            background-color: var(--neon-green);
-            color: #050b11; /* Clear Onyx contrast tone against ultra-bright green background */
-        }
-        .btn-online::after {
-            background-color: #ffffff; /* White overgrip wrap style */
-            border: 1px solid #cbd5e1;
-        }
+        /* Strict Legibility Contrast Profiles */
+        .btn-online .paddle-title { color: #050b11; }
+        .btn-ai .paddle-title { color: #ffffff; }
 
-        /* Contrasting Paddle 2: Neon Orange Face + Stealth Charcoal Grip */
-        .btn-ai {
-            background-color: var(--neon-orange);
-            color: #ffffff; /* Pure white text setup for contrast readability against rich orange */
-        }
-        .btn-ai::after {
-            background-color: #1e293b; /* Premium dark grip wrap style */
-            border: 1px solid #0f172a;
-        }
-
-        /* --- High-Contrast Bottom Navigation Menu --- */
+        /* --- High Contrast Bottom Utility Grid --- */
         .bottom-nav {
             display: flex;
             justify-content: space-around;
-            padding: 12px 10px calc(12px + env(safe-area-inset-bottom)); /* Safe spacing boundary for modern edge-to-edge hardware */
-            background: var(--dark-panel);
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            padding: 14px 10px calc(14px + env(safe-area-inset-bottom));
+            background: #0f172a;
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
         }
 
         .nav-item { 
             font-size: 12px; 
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-muted); 
             text-align: center; 
             cursor: pointer;
@@ -217,7 +200,7 @@
         }
 
         .nav-item:hover, .nav-item.active {
-            color: var(--text-light);
+            color: #ffffff;
         }
 
         .nav-icon {
@@ -226,68 +209,84 @@
             display: inline-block;
         }
 
-        /* Keyframe Animations */
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
+            50% { transform: translateY(-8px); }
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. Top Navigation Context Strip -->
     <div class="top-bar">
         <span style="font-size: 20px; cursor: pointer;">☰</span>
-        <span style="font-weight: 600; letter-spacing: 0.5px;">dinkdink.org</span>
+        <span style="font-weight: 700; letter-spacing: 0.5px;">dinkdink.org</span>
         <span style="font-size: 20px; cursor: pointer;">⚙️</span>
     </div>
 
-    <!-- 2. Main Game Branding Block & Refactored Live Social Proof -->
     <div class="logo-area">
         <h1>DINK DINK!</h1>
-        <div class="live-counter">🟢 PLAYERS ONLINE NOW[cite: 1, 2, 3]</div>
+        <div class="live-counter">🟢 PLAYERS ONLINE NOW</div>
     </div>
 
-    <!-- 3. Dynamic Video Preview Engine Frame -->
     <div class="preview-container">
         <video class="game-preview-video" autoplay loop muted playsinline>
             <source src="gameplay-preview.mp4" type="video/mp4">
-            Your device layout handles automated game rendering loops.
         </video>
-        <!-- Interactive community element overlay -->
-        <div class="chat-bubble">Nice dink shot! 💥[cite: 1, 2, 3]</div>
+        <div class="chat-bubble">Nice dink shot! 💥</div>
     </div>
 
-    <!-- 4. Contrasting Paddle Selection Area -->
     <div class="action-area">
-        <button class="btn btn-online" onclick="console.log('Initiating online live matchmaking queue...')">
-            🏓 ONLINE MULTI[cite: 1, 2, 3]
-        </button>
-        <button class="btn btn-ai" onclick="console.log('Booting localized offline AI engine...')">
-            🤖 VS. AI CHALLENGE[cite: 1, 2, 3]
-        </button>
+        
+        <div class="paddle-wrapper btn-online" onclick="console.log('Matchmaking initialized...')">
+            <svg class="paddle-svg" viewBox="0 0 130 200" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 15,65 C 15,15 115,15 115,65 L 110,135 C 110,145 95,150 85,152 L 85,195 C 85,198 45,198 45,195 L 45,152 C 35,150 20,145 20,135 Z" fill="#1e293b" />
+                <path d="M 19,65 C 19,21 111,21 111,65 L 106,133 C 106,141 93,146 81,147 L 81,152 L 49,152 L 49,147 C 37,146 24,141 24,133 Z" fill="#39ff14" />
+                <path d="M 49,152 L 81,152 L 78,194 C 78,196 52,196 52,194 Z" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" />
+                <line x1="50" y1="162" x2="80" y2="166" stroke="#e2e8f0" stroke-width="1.5" />
+                <line x1="51" y1="172" x2="79" y2="176" stroke="#e2e8f0" stroke-width="1.5" />
+                <line x1="51" y1="182" x2="79" y2="186" stroke="#e2e8f0" stroke-width="1.5" />
+            </svg>
+            <div class="paddle-text-overlay">
+                <span class="paddle-icon">🏓</span>
+                <span class="paddle-title">Online<br>Multi</span>
+            </div>
+        </div>
+
+        <div class="paddle-wrapper btn-ai" onclick="console.log('AI Engine loading...')">
+            <svg class="paddle-svg" viewBox="0 0 130 200" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 15,65 C 15,15 115,15 115,65 L 110,135 C 110,145 95,150 85,152 L 85,195 C 85,198 45,198 45,195 L 45,152 C 35,150 20,145 20,135 Z" fill="#1e293b" />
+                <path d="M 19,65 C 19,21 111,21 111,65 L 106,133 C 106,141 93,146 81,147 L 81,152 L 49,152 L 49,147 C 37,146 24,141 24,133 Z" fill="#ff5e00" />
+                <path d="M 49,152 L 81,152 L 78,194 C 78,196 52,196 52,194 Z" fill="#334155" stroke="#0f172a" stroke-width="1" />
+                <line x1="50" y1="162" x2="80" y2="166" stroke="#1e293b" stroke-width="1.5" />
+                <line x1="51" y1="172" x2="79" y2="176" stroke="#1e293b" stroke-width="1.5" />
+                <line x1="51" y1="182" x2="79" y2="186" stroke="#1e293b" stroke-width="1.5" />
+            </svg>
+            <div class="paddle-text-overlay">
+                <span class="paddle-icon">🤖</span>
+                <span class="paddle-title">VS. AI<br>Challenge</span>
+            </div>
+        </div>
+
     </div>
 
-    <!-- 5. Upgraded High-Contrast Footprint Navigation Matrix -->
     <div class="bottom-nav">
         <div class="nav-item active">
             <span class="nav-icon">🏆</span><br>Ranks
         </div>
         <div class="nav-item">
-            <span class="nav-icon">🎨</span><br>My Paddle[cite: 1, 2, 3]
+            <span class="nav-icon">🎨</span><br>My Paddle
         </div>
         <div class="nav-item">
-            <span class="nav-icon">🌐</span><br>Community[cite: 1, 2, 3]
+            <span class="nav-icon">🌐</span><br>Community
         </div>
     </div>
 
     <script>
-        // Automatic PWA service worker enrollment script
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js')
-                    .then(reg => console.log('DinkDink service environment framework successfully registered.', reg))
-                    .catch(err => console.error('Service worker initialization boundary error:', err));
+                    .then(reg => console.log('PWA Service Worker running smoothly.', reg))
+                    .catch(err => console.error('PWA Boundary Failure:', err));
             });
         }
     </script>
