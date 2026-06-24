@@ -23,6 +23,7 @@
             --neon-orange: #ff5e00;
             --text-dark: #0f172a;
             --text-light: #ffffff;
+            --text-muted: #cbd5e1; /* Boosted slate tint for extreme legibility */
         }
 
         body {
@@ -32,16 +33,17 @@
             color: var(--text-light);
             display: flex;
             flex-direction: column;
+            
+            /* CRITICAL FIX: Dynamic Viewport Height prevents mobile browser bar overlapping */
             height: 100vh;
+            height: 100dvh; 
             overflow: hidden;
             
-            /* Authentic Acrylic Sport Court Background Layout */
+            /* Acrylic Sport Court Background Layout */
             background-color: var(--court-blue);
             background-image: 
-                /* White Court Sidelines / Kitchen Line Accents */
                 linear-gradient(90deg, rgba(255,255,255,0.15) 2px, transparent 2px),
                 linear-gradient(0deg, rgba(255,255,255,0.15) 2px, transparent 2px),
-                /* Dynamic lighting gradient to simulate an outdoor stadium light drop */
                 radial-gradient(circle at 50% 30%, rgba(255,255,255,0.2) 0%, rgba(15,23,42,0.4) 100%);
             background-size: 100% 100%, 100% 100%, auto;
             background-position: center;
@@ -55,8 +57,8 @@
         .top-bar {
             display: flex;
             justify-content: space-between;
-            padding: 15px 20px;
-            background: rgba(15, 23, 42, 0.6);
+            padding: 12px 20px;
+            background: rgba(15, 23, 42, 0.7);
             align-items: center;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -65,12 +67,12 @@
 
         .logo-area {
             text-align: center;
-            padding: 15px 0 5px 0;
+            padding: 10px 0 0px 0;
         }
 
         .logo-area h1 { 
             margin: 0; 
-            font-size: 36px; 
+            font-size: 34px; 
             font-weight: 900;
             letter-spacing: 1px;
             color: var(--text-light);
@@ -80,7 +82,7 @@
         .live-counter { 
             color: var(--neon-green); 
             font-weight: 800; 
-            font-size: 14px; 
+            font-size: 13px; 
             margin-top: 4px; 
             letter-spacing: 1px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
@@ -89,7 +91,7 @@
         /* --- Video Arena Container --- */
         .preview-container {
             flex: 1;
-            padding: 10px 24px;
+            padding: 5px 24px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -99,23 +101,24 @@
 
         .game-preview-video {
             width: 100%;
-            max-height: 38vh;
+            height: 100%;
+            max-height: 34vh;
             border-radius: 24px;
             object-fit: cover;
-            border: 3px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.5);
-            background-color: rgba(15, 23, 42, 0.8);
+            border: 3px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.5);
+            background-color: rgba(15, 23, 42, 0.9);
         }
 
         .chat-bubble {
             position: absolute;
-            bottom: -5px;
+            bottom: -10px;
             background: #ffffff;
             color: var(--text-dark);
-            padding: 10px 22px;
+            padding: 8px 20px;
             border-radius: 30px;
             font-weight: 800;
-            font-size: 14px;
+            font-size: 13px;
             box-shadow: 0px 8px 24px rgba(0,0,0,0.3);
             animation: bounce 2.5s infinite;
             border: 2px solid var(--text-dark);
@@ -124,10 +127,10 @@
 
         /* --- Authentic Vector Paddle Controls --- */
         .action-area {
-            padding: 20px 20px 35px 20px;
+            padding: 15px 20px 25px 20px;
             display: flex;
             justify-content: space-around;
-            gap: 15px;
+            gap: 20px;
         }
 
         .paddle-wrapper {
@@ -137,7 +140,7 @@
             flex-direction: column;
             align-items: center;
             cursor: pointer;
-            max-width: 160px;
+            max-width: 145px;
             transition: transform 0.1s ease;
         }
 
@@ -148,13 +151,12 @@
         .paddle-svg {
             width: 100%;
             height: auto;
-            filter: drop-shadow(0px 12px 12px rgba(0,0,0,0.4));
+            filter: drop-shadow(0px 10px 10px rgba(0,0,0,0.4));
         }
 
-        /* High Visibility Interactive Overlays Centered on Paddle Face */
         .paddle-text-overlay {
             position: absolute;
-            top: 28%; /* Keeps text centered directly inside the wide paddle head face */
+            top: 25%; 
             width: 85%;
             text-align: center;
             pointer-events: none;
@@ -165,19 +167,18 @@
         }
 
         .paddle-icon {
-            font-size: 24px;
-            margin-bottom: 4px;
+            font-size: 22px;
+            margin-bottom: 2px;
         }
 
         .paddle-title {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 900;
             line-height: 1.2;
             letter-spacing: 0.5px;
             text-transform: uppercase;
         }
 
-        /* Strict Legibility Contrast Profiles */
         .btn-online .paddle-title { color: #050b11; }
         .btn-ai .paddle-title { color: #ffffff; }
 
@@ -185,58 +186,71 @@
         .bottom-nav {
             display: flex;
             justify-content: space-around;
-            padding: 14px 10px calc(14px + env(safe-area-inset-bottom));
-            background: #0f172a;
-            border-top: 2px solid rgba(255, 255, 255, 0.1);
+            align-items: center;
+            /* CRITICAL FIX: Enhanced padding values to push content clean out of mobile safety bars */
+            padding-top: 16px;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-bottom: calc(24px + env(safe-area-inset-bottom));
+            background: #090d16; 
+            border-top: 2px solid rgba(255, 255, 255, 0.15);
         }
 
         .nav-item { 
-            font-size: 12px; 
-            font-weight: 700;
+            font-size: 13px; 
+            font-weight: 800;
             color: var(--text-muted); 
             text-align: center; 
             cursor: pointer;
-            transition: color 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .nav-item:hover, .nav-item.active {
+        .nav-item.active {
             color: #ffffff;
+            text-shadow: 0px 0px 8px rgba(255,255,255,0.6);
         }
 
         .nav-icon {
             font-size: 22px;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
             display: inline-block;
         }
 
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+            50% { transform: translateY(-6px); }
         }
     </style>
 </head>
 <body>
 
+    <!-- 1. Global Context Strip -->
     <div class="top-bar">
         <span style="font-size: 20px; cursor: pointer;">☰</span>
         <span style="font-weight: 700; letter-spacing: 0.5px;">dinkdink.org</span>
         <span style="font-size: 20px; cursor: pointer;">⚙️</span>
     </div>
 
+    <!-- 2. Main Title Layout -->
     <div class="logo-area">
         <h1>DINK DINK!</h1>
         <div class="live-counter">🟢 PLAYERS ONLINE NOW</div>
     </div>
 
+    <!-- 3. Central Media Environment Stage -->
     <div class="preview-container">
+        <!-- Pro-tip: Insert your preview graphic placeholder directly here inside the block context -->
         <video class="game-preview-video" autoplay loop muted playsinline>
             <source src="gameplay-preview.mp4" type="video/mp4">
         </video>
         <div class="chat-bubble">Nice dink shot! 💥</div>
     </div>
 
+    <!-- 4. Real Paddle Interaction Block -->
     <div class="action-area">
         
+        <!-- Paddle 1: Online Multiplayer -->
         <div class="paddle-wrapper btn-online" onclick="console.log('Matchmaking initialized...')">
             <svg class="paddle-svg" viewBox="0 0 130 200" xmlns="http://www.w3.org/2000/svg">
                 <path d="M 15,65 C 15,15 115,15 115,65 L 110,135 C 110,145 95,150 85,152 L 85,195 C 85,198 45,198 45,195 L 45,152 C 35,150 20,145 20,135 Z" fill="#1e293b" />
@@ -252,6 +266,7 @@
             </div>
         </div>
 
+        <!-- Paddle 2: VS AI Challenge -->
         <div class="paddle-wrapper btn-ai" onclick="console.log('AI Engine loading...')">
             <svg class="paddle-svg" viewBox="0 0 130 200" xmlns="http://www.w3.org/2000/svg">
                 <path d="M 15,65 C 15,15 115,15 115,65 L 110,135 C 110,145 95,150 85,152 L 85,195 C 85,198 45,198 45,195 L 45,152 C 35,150 20,145 20,135 Z" fill="#1e293b" />
@@ -269,6 +284,7 @@
 
     </div>
 
+    <!-- 5. Navigation Layer -->
     <div class="bottom-nav">
         <div class="nav-item active">
             <span class="nav-icon">🏆</span><br>Ranks
@@ -285,8 +301,8 @@
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js')
-                    .then(reg => console.log('PWA Service Worker running smoothly.', reg))
-                    .catch(err => console.error('PWA Boundary Failure:', err));
+                    .then(reg => console.log('PWA active.', reg))
+                    .catch(err => console.error('PWA fault:', err));
             });
         }
     </script>
