@@ -1,20 +1,24 @@
 /* --- Left side: Responsive, Frameless Court Arena Box --- */
 .arena-container {
-    flex: 1.6; /* Keeps the dominant width split */
+    flex: 1.6; /* Keeps the dominant split footprint */
     position: relative;
     box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.4);
-    background-color: transparent; /* Eliminates the empty black blocks */
-    border: none; /* Let the dinkcourt2.png asset's native white border do the framing work */
-    overflow: visible; /* Essential for the chat bubble overlay popout */
+    background-color: transparent; 
+    border: none; 
+    overflow: visible; /* Keeps chat bubble overlay unclipped */
     display: flex;
     justify-content: center;
     align-items: center;
+    
+    /* FIX: Force container width to collapse around the contained image width */
+    width: max-content;
+    margin: 0 auto;
 }
 
 .game-preview-image {
     width: 100%;
-    height: auto; /* Scales down or up naturally keeping proportions */
-    max-height: 58vh; /* Tight bounding safeguard so it never pushes the bottom menus */
+    height: auto; 
+    max-height: 58vh; /* Bounding safeguard to prevent navigation overlap */
     object-fit: contain;
     display: block;
 }
@@ -22,7 +26,7 @@
 /* --- Anchored Overlay Chat Bubble --- */
 .chat-bubble {
     position: absolute;
-    bottom: -8px; /* Snugs it perfectly against the baseline of your graphic */
+    bottom: -12px; /* Perfect snug alignment below baseline of the art */
     left: 50%;
     transform: translateX(-50%); 
     background: var(--stark-white);
