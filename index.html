@@ -103,21 +103,21 @@
             display: flex;
             flex-direction: row;
             flex: 1; 
-            padding: 10px 15px 15px 15px;
+            padding: 10px 15px 20px 15px;
             gap: 15px;
             min-height: 0; 
             align-items: stretch; 
         }
 
-        /* Left side: Securely Anchored Arena Frame */
+        /* Left side: Widened, Well-Anchored Arena Frame */
         .arena-container {
-            flex: 1.3; 
+            flex: 2.2; /* Increased width to let the vertical graphic fill out nicely */
             position: relative;
             border-radius: 20px;
             border: 4px solid var(--stark-white);
             box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.5);
             background-color: var(--stark-black);
-            overflow: visible; /* Allows chat bubble overlay */
+            overflow: visible; /* Essential for chat bubble breakout */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -126,12 +126,12 @@
         .game-preview-image {
             width: 100%;
             height: 100%;
-            object-fit: cover; 
+            object-fit: contain; /* Ensures court aspect ratio doesn't distort or clip */
             object-position: center; 
             border-radius: 16px; 
         }
 
-        /* Perfectly Overlayed Chat Bubble */
+        /* Anchored Overlay Chat Bubble */
         .chat-bubble {
             position: absolute;
             bottom: -14px; 
@@ -139,17 +139,17 @@
             transform: translateX(-50%); 
             background: var(--stark-white);
             color: var(--stark-black);
-            padding: 6px 14px;
+            padding: 6px 16px;
             border-radius: 30px;
             font-weight: 900;
-            font-size: 12px;
+            font-size: 13px;
             box-shadow: 0px 6px 15px rgba(0,0,0,0.4);
             border: 3px solid var(--stark-black);
             z-index: 5;
             white-space: nowrap; 
         }
 
-        /* Right side: Vertically Stacked Paddles */
+        /* Right side: Vertically Stacked Paddles Container */
         .paddles-container {
             flex: 0.8; 
             display: flex;
@@ -160,7 +160,7 @@
 
         .paddle-wrapper {
             width: 100%;
-            max-width: 120px; 
+            max-width: 110px; 
             position: relative;
             display: flex;
             flex-direction: column;
@@ -179,12 +179,12 @@
             filter: drop-shadow(0px 8px 8px rgba(0,0,0,0.4));
         }
 
-        /* Inside Paddle Content Formatting */
+        /* Paddle Overlay Text formatting */
         .paddle-text-overlay {
             position: absolute;
             top: 18%; 
             width: 100%;
-            padding: 0 8px;
+            padding: 0 4px;
             box-sizing: border-box;
             text-align: center;
             pointer-events: none;
@@ -216,7 +216,7 @@
             white-space: nowrap;
         }
 
-        /* High-Contrast Colors */
+        /* Colors and Shadows */
         .btn-online .paddle-row-main { color: #000000; }
         .btn-online .paddle-row-sub { color: #000000; font-weight: 900; }
         
