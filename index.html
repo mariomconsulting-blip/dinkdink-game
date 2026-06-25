@@ -98,10 +98,10 @@
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
-        /* --- NEW: Optimum Vertical Stack Layout Engine --- */
+        /* --- Vertical Stack Layout Engine --- */
         .main-layout {
             display: flex;
-            flex-direction: column; /* Stacks everything vertically */
+            flex-direction: column; 
             flex: 1; 
             padding: 8px 15px;
             gap: 12px;
@@ -110,27 +110,27 @@
             justify-content: space-between;
         }
 
-        /* Prominent, Well-Anchored Court Frame occupying maximum available space */
+        /* Prominent, Well-Anchored Court Frame using explicit layout properties */
         .arena-container {
             width: 100%;
-            max-width: 340px; /* Keeps it tight and realistic on large screens */
-            flex: 1; /* Automatically consumes available vertical space */
+            max-width: 320px; 
+            flex: 1; 
             position: relative;
             border-radius: 20px;
             border: 4px solid var(--stark-white);
             box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
             background-color: var(--stark-black);
-            overflow: visible; /* Crucial for chat bubble popout */
+            overflow: visible; /* Essential for chat bubble popout */
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 0; /* Safeguard for flex child image shrinking */
+            min-height: 0; 
         }
 
         .game-preview-image {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Locks layout proportions perfectly without cropping */
+            object-fit: contain; /* Preserves the native aspect ratio without squeezing */
             border-radius: 16px; 
         }
 
@@ -157,7 +157,7 @@
             width: 100%;
             max-width: 360px;
             display: flex;
-            flex-direction: row; /* Horizontal row beneath court */
+            flex-direction: row; 
             justify-content: space-around; 
             align-items: flex-start;
             padding-bottom: 5px;
